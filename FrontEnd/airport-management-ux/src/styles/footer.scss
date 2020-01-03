@@ -1,0 +1,20 @@
+@import "variables.scss";
+
+.footer {
+  font-family: $roboto-slab;
+  background: $shadow-background;
+  width: 100%;
+  height: 100%;
+  display: block;
+
+  .footerContainer {
+    width: 60%;
+    margin: auto;
+  }
+  .links {
+    display: inline-block;
+    color: $link-color;
+    padding: 10px;
+    margin: 20px;
+  }
+}
