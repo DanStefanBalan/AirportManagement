@@ -1,9 +1,19 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto+Slab|Open+Sans:400italic);
 
 /*Fonts*/
-$roboto-slab: "Roboto Slab", serif;
+$roboto-slab: "Roboto Slab",
+serif;
 /*Background*/
+$main-background: #336b87;
 $shadow-background: #2a3132;
+$error-message-background: #f8d7da;
+$body-background: #f4f7fa;
 
 /*Colors*/
 $link-color: #90afc5;
+$light-link-color: #a6bfd0;
+$dark-gray-color: #cfd1dd;
+$error-message-color: #721c24;
+$error-message-border-color: #f5c6cb;
+$brown-color: #763626;
+$border-input-color: #798fa6;

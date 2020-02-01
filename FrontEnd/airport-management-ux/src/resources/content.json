@@ -1,0 +1,114 @@
+{
+  "login": {
+    "username": {
+      "name": "username",
+      "placeholder": "Username",
+      "empty": "Username is not allowed to be empty",
+      "min": "Username length must be at least 5 characters long",
+      "max": "Username length must be less than or equal to 12 characters long"
+    },
+    "password": {
+      "name": "password",
+      "placeholder": "Password",
+      "empty": "Password is not allowed to be empty",
+      "min": "Password length must be at least 5 characters long"
+    },
+    "passwordConfirmation": {
+      "name": "passwordConfirmation",
+      "placeholder": "Password confirmation",
+      "match": "The passwords don't match"
+    },
+    "email": {
+      "name": "email",
+      "placeholder": "Email",
+      "empty": "Email is not allowed to be empty",
+      "valid": "The email is not valid."
+    },
+    "signInTitle": "Sign in",
+    "singUpTitle": "New account",
+    "signInButton": "Login in",
+    "singUpButton": "Register"
+  },
+
+  "flight": {
+    "title": "Add a flight",
+    "submitButton": {
+      "name": "Add flight"
+    },
+    "updateButton": {
+      "name": "Update flight"
+    },
+    "backButton": {
+      "name": "Back"
+    },
+    "flightNumber": {
+      "name": "flightNumber",
+      "label": "Flight Number"
+    },
+    "aircraft": {
+      "name": "aircraft",
+      "label": "Aircraft"
+    },
+    "destination": {
+      "name": "destination",
+      "label": "Destination"
+    },
+    "estimationTime": {
+      "name1": "estimationHoursTime",
+      "name2": "estimationMinutesTime",
+      "label": "Estimation Time"
+    },
+    "arrivalTime": {
+      "name1": "arrivalHoursTime",
+      "name2": "arrivalMinutesTime",
+      "label": "Arrival Time"
+    },
+    "departureTime": {
+      "name1": "departureHoursTime",
+      "name2": "departureMinutesTime",
+      "label": "Departure Time"
+    },
+    "flightTime": {
+      "name1": "flightHoursTime",
+      "name2": "flightMinutesTime",
+      "label": "Flight Time"
+    },
+    "status": {
+      "name": "status",
+      "label": "Status"
+    },
+    "gate": {
+      "name": "gate",
+      "label": "Gate"
+    },
+    "airline": {
+      "name": "airline",
+      "label": "Airline"
+    }
+  },
+
+  "airport": {
+    "title": "Add an airport",
+    "submitButton": {
+      "name": "Add an airport"
+    },
+    "updateButton": {
+      "name": "Update airport"
+    },
+    "backButton": {
+      "name": "Back"
+    },
+    "name": {
+      "name": "name",
+      "label": "Airport Name"
+    },
+    "country": {
+      "name": "country",
+      "label": "Country"
+    },
+    "city": {
+      "name": "city",
+      "label": "City"
+    }
+  }
+}

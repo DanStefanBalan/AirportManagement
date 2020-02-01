@@ -1,0 +1,118 @@
+@import "../variables.scss";
+@import "../mixins.scss";
+
+body {
+  background-color: $body-background;
+  font-family: $roboto-slab;
+
+  .form-inner-content {
+    width: 70%;
+    margin: auto;
+
+    .header-section-wrapper {
+      @include section(0.5em, margin-bottom);
+
+      .title {
+        font-size: 24px;
+        font-weight: 500;
+        color: $brown-color;
+        display: inline-block;
+      }
+
+      .icon {
+        padding: 10px 20px;
+        display: inline-block;
+      }
+    }
+
+    @include row-types;
+
+    .input-wrapper,
+    .smaller-input-wrapper {
+      @include control-wrapper;
+
+      .input {
+        @include control;
+
+        label {
+          @include label;
+        }
+
+        input {
+          @include input();
+        }
+
+        .has-error {
+          @include error;
+        }
+      }
+
+      .error-wrapper {
+        @include error-wrapper;
+      }
+
+    }
+
+    .double-input-wrapper {
+      @include control-wrapper;
+
+      .double-input {
+        @include control;
+
+        label {
+          @include label;
+        }
+
+        input {
+          @include input(24%);
+          padding-left: 50px;
+        }
+
+        .has-error {
+          @include error;
+        }
+      }
+
+      .error-wrapper {
+        @include error-wrapper;
+      }
+    }
+
+  }
+
+  .select-wrapper {
+    @include control-wrapper;
+
+    .select {
+      @include control;
+
+      label {
+        @include label;
+      }
+
+      select {
+        @include input();
+      }
+
+      .has-error {
+        @include error;
+      }
+    }
+
+    .error-wrapper {
+      @include error-wrapper;
+    }
+  }
+}
+
+.bottom-section-wrapper {
+  @include section(0.75em, margin-top);
+
+  .add-flight {
+    @include button;
+  }
+
+  .back-button {
+    @include button(none, $link-color)
+  }
+}

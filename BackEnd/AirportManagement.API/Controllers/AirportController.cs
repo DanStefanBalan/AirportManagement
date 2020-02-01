@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using AirportManagement.API.Models;
 using AirportManagement.Data;
 using AirportManagement.Service.Repository;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace AirportManagement.API.Controllers
 {
@@ -25,21 +28,30 @@ namespace AirportManagement.API.Controllers
         public ActionResult CreateAirport([FromBody] AirportModel airportModel)
         {
             var airport = Airport.Create(airportModel.Name, airportModel.Country, airportModel.City);
-            _airportService.InsertAirport(airport);
-            return Ok("all good");
+            var duplicateAirport =
+                _airportService.GetSameAirport(airportModel.Name, airportModel.Country, airportModel.City);
+            if(!duplicateAirport.Any() )
+            {
+                _airportService.Add(airport);
+                return Ok("all good");
+            }
+            else
+            {
+                return BadRequest("test");
+            }
         }
 
         [HttpGet]
         public ActionResult <IEnumerable<AirportModel>> GetAllAirports ()
         {
-            var airports = _airportService.GetAirports();
+            var airports = _airportService.GetAll();
             return Ok(_mapper.Map<IEnumerable<AirportModel>>(airports));
         }
 
         [HttpGet("{airportId}")]
         public ActionResult GetAirportById(Guid airportId)
         {
-            var airport = _airportService.GetAirport(airportId);
+            var airport = _airportService.Get(airportId);
             return Ok(_mapper.Map<AirportModel>(airport));
         }
 
@@ -48,14 +60,23 @@ namespace AirportManagement.API.Controllers
         [HttpDelete("{airportId}")]
         public ActionResult DeleteAirport(Guid airportId)
         {
-            var airportFromDb = _airportService.GetAirport(airportId);
+            var airportFromDb = _airportService.Get(airportId);
             if (airportFromDb == null)
             {
                 return NotFound();
             }
 
-            _airportService.DeleteAirport(airportId);
+            _airportService.Remove(airportFromDb);
             return NoContent();
+        }
+
+        [HttpPut("{airportId}")]
+        public IActionResult UpdateAirportDetails(Guid airportId, [FromBody] AirportModel airportModel)
+        {
+            var airport = _airportService.Get(airportId);
+            airport.Update(airportModel.Name, airportModel.Country, airportModel.City);
+            _airportService.Update(airport);
+            return Ok();
         }
     }
 }

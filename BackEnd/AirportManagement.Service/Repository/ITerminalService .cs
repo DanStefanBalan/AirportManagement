@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using AirportManagement.Data;
+using AirportManagement.Repo;
 
 namespace AirportManagement.Service.Repository
 {
-    public interface ITerminalService
+    public interface ITerminalService : IRepository<Terminal>
     {
-        IEnumerable<Terminal> GetTerminals();
-        Terminal GetTerminal(Guid id);
-        void InsertTerminal(Terminal terminal);
-        void InsertTerminals(IEnumerable<Terminal> terminals);
-        void DeleteTerminal(Guid id);
-        void DeleteTerminals(IEnumerable<Terminal> terminals);
-        void UpdateTerminal(Terminal terminal);
+
     }
 }

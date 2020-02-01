@@ -1,27 +1,34 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSignInAlt, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
-import "../../styles/navbar.scss";
+import {
+  faSignInAlt,
+  faSignOutAlt,
+  faUserPlus
+} from "@fortawesome/free-solid-svg-icons";
+
+import "../../styles/common/navbar.scss";
+import { Link } from "react-router-dom";
 
 class NavBar extends Component {
   state = {
-    logged: true
+    logged: true,
+    user: ""
   };
 
   isLoggedIn() {
     if (this.state.logged === true)
       return (
-        <label>
+        <Link to="/login">
           <FontAwesomeIcon icon={faSignInAlt} />
           Login
-        </label>
+        </Link>
       );
     else
       return (
-        <label>
+        <Link to="/">
           <FontAwesomeIcon icon={faSignOutAlt} />
           Logout
-        </label>
+        </Link>
       );
   }
 
@@ -29,12 +36,22 @@ class NavBar extends Component {
     return (
       <nav className="navigation-bar">
         <div className="navContainer">
-          <img
-            className="logo"
-            src={require("../../resources/logo.png")}
-            alt="logo-airport"
-          />
-          <div className="loginOption">{this.isLoggedIn()}</div>
+          <div className="imageContainer">
+            <Link to="/">
+              <img
+                className="logo"
+                src={require("../../resources/images/logo.png")}
+                alt="logo-airport"
+              />
+            </Link>
+          </div>
+          <div className="option">{this.isLoggedIn()}</div>
+          <div className="option">
+            <Link to="/register">
+              <FontAwesomeIcon icon={faUserPlus} />
+              Sign up
+            </Link>
+          </div>
         </div>
       </nav>
     );

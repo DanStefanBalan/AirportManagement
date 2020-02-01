@@ -1,55 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using AirportManagement.Data;
 using AirportManagement.Repo;
 using AirportManagement.Service.Repository;
 
 namespace AirportManagement.Service.Implementation
 {
-    public class AirportService : IAirportService
+    public class AirportService : Repository<Airport>, IAirportService
     {
-        private readonly IRepository<Airport> _airportRepository;
-
-        public AirportService(IRepository<Airport> airportRepository)
+        public AirportService(ApplicationContext context)
+            : base(context)
         {
-            _airportRepository = airportRepository;
         }
 
-        public IEnumerable<Airport> GetAirports()
+        public IEnumerable<Airport> GetSameAirport(string name, string country, string city)
         {
-            return _airportRepository.GetAll();
-        }
-
-        public Airport GetAirport(Guid id)
-        {
-            return _airportRepository.Get(id);
-        }
-
-        public void InsertAirport(Airport airport)
-        {
-            _airportRepository.Insert(airport);
-        }
-
-        public void InsertAirports(IEnumerable<Airport> airports)
-        {
-            _airportRepository.InsertRange(airports);
-        }
-
-        public void DeleteAirports(IEnumerable<Airport> airports)
-        {
-            _airportRepository.DeleteRange(airports);
-        }
-
-        public void UpdateAirport(Airport airport)
-        {
-            _airportRepository.Update(airport);
-        }
-
-        public void DeleteAirport(Guid id)
-        {
-            Airport airport = GetAirport(id);
-            _airportRepository.Delete(airport);
-            _airportRepository.SaveChanges();
+            return Context.Set<Airport>().Where(a => a.Name == name && a.Country == country && a.City == city).ToList();
         }
     }
 }

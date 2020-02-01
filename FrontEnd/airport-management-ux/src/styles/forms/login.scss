@@ -1,0 +1,121 @@
+@import "../variables.scss";
+@import "../mixins.scss";
+
+@font-face {
+  font-family: FontAwesome;
+  src: url('../../fonts/font.eot') format('eot'),
+    url('../../fonts/font.woff') format('woff');
+}
+
+span {
+  padding: 10px;
+  font-family: 'FontAwesome', "Open Sans", Verdana, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+}
+
+.formWrapper {
+  width: 35%;
+  margin: 0 auto;
+  font-family: $roboto-slab;
+  background-color: $light-link-color;
+
+  form {
+    padding: 0 35px 45px;
+  }
+
+  .header-buttons {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 35%;
+    font-family: $roboto-slab;
+    background-color: $link-color;
+    padding: 0 35px 45px;
+  }
+
+
+  .title-wrapper {
+    background: $link-color;
+    color: $brown-color;
+    font-weight: 500;
+    font-size: 20px;
+    padding: 25px;
+    margin-bottom: 25px;
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+    border: none;
+
+    .icon {
+      display: inline-block;
+      padding-right: 10px;
+    }
+  }
+
+  .active {
+    background: $light-link-color;
+  }
+
+  .input-wrapper {
+    padding: 1.5em;
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+
+    .input {
+      width: 100%;
+      display: block;
+      margin: 0 auto;
+
+      label {
+        display: none;
+      }
+
+      input {
+        @include input(100%);
+        font-style: normal;
+      }
+
+      input::placeholder {
+        padding: 10px;
+        font-family: 'FontAwesome', $roboto-slab;
+        font-size: 16px;
+      }
+
+      .has-error {
+        @include error;
+      }
+    }
+
+    .error-wrapper {
+      @include error-wrapper(100%);
+    }
+  }
+
+  .smaller-input-wrapper {
+    @extend .input-wrapper;
+    padding: 0.5em;
+  }
+
+  .loginField {
+    ::placeholder {
+      color: red;
+    }
+  }
+
+  .loginButton {
+    background-color: $brown-color;
+    width: 88%;
+    height: 50px;
+    margin: 20px auto;
+    display: block;
+    border: none;
+    color: $shadow-background;
+    font-size: 22px;
+    border-radius: 5px;
+  }
+}

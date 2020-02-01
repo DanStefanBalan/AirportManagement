@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using AirportManagement.Data;
+using AirportManagement.Repo;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace AirportManagement.Service.Repository
 {
-    public interface IAirportService
+    public interface IAirportService : IRepository<Airport>
     {
-        IEnumerable<Airport> GetAirports();
-        Airport GetAirport(Guid id);
-        void InsertAirport(Airport airport);
-        void InsertAirports(IEnumerable<Airport> airports);
-        void DeleteAirport(Guid id);
-        void DeleteAirports(IEnumerable<Airport> airports);
-        void UpdateAirport(Airport airport);
+        IEnumerable<Airport> GetSameAirport(string name, string country, string city);
     }
 }

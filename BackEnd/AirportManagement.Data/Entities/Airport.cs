@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 namespace AirportManagement.Data
 {
@@ -21,5 +22,11 @@ namespace AirportManagement.Data
             City = city
         };
 
+        public void Update(string name, string country, string city)
+        {
+            Name = name;
+            Country = country;
+            City = city;
+        }
     }
 }

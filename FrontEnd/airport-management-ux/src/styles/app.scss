@@ -1,0 +1,9 @@
+@import "../styles/variables.scss";
+
+body {
+  background-color: $main-background !important;
+
+  .content {
+    margin: 35px 0;
+  }
+}

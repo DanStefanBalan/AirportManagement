@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using AirportManagement.Data;
+using AirportManagement.Repo;
 
 namespace AirportManagement.Service.Repository
 {
-    public interface IGateService
+    public interface IGateService:IRepository<Gate>
     {
-        IEnumerable<Gate> GetGates();
-        Gate GetGate(Guid id);
-        void InsertGate(Gate gate);
-        void InsertGates(IEnumerable<Gate> gates);
-        void DeleteGate(Guid id);
-        void DeleteGates(IEnumerable<Gate> gates);
-        void UpdateGate(Gate gate);
+
     }
 }

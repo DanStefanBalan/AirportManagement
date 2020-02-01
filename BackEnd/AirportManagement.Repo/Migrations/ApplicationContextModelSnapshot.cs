@@ -55,7 +55,7 @@ namespace AirportManagement.Repo.Migrations
                         .IsUnique()
                         .HasFilter("[FlightId] IS NOT NULL");
 
-                    b.ToTable("Aircraft");
+                    b.ToTable("Aircrafts");
                 });
 
             modelBuilder.Entity("AirportManagement.Data.Airport", b =>
@@ -75,7 +75,7 @@ namespace AirportManagement.Repo.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Airport");
+                    b.ToTable("Airports");
                 });
 
             modelBuilder.Entity("AirportManagement.Data.Destination", b =>
@@ -104,7 +104,7 @@ namespace AirportManagement.Repo.Migrations
                         .IsUnique()
                         .HasFilter("[FlightDestinationId] IS NOT NULL");
 
-                    b.ToTable("Destination");
+                    b.ToTable("Destinations");
                 });
 
             modelBuilder.Entity("AirportManagement.Data.Flight", b =>
@@ -144,7 +144,7 @@ namespace AirportManagement.Repo.Migrations
 
                     b.HasIndex("AirportId");
 
-                    b.ToTable("Flight");
+                    b.ToTable("Flights");
                 });
 
             modelBuilder.Entity("AirportManagement.Data.Gate", b =>
@@ -177,7 +177,7 @@ namespace AirportManagement.Repo.Migrations
 
                     b.HasIndex("TerminalId");
 
-                    b.ToTable("Gate");
+                    b.ToTable("Gates");
                 });
 
             modelBuilder.Entity("AirportManagement.Data.Terminal", b =>
@@ -206,7 +206,7 @@ namespace AirportManagement.Repo.Migrations
                         .IsUnique()
                         .HasFilter("[DestinationId] IS NOT NULL");
 
-                    b.ToTable("Terminal");
+                    b.ToTable("Terminals");
                 });
 
             modelBuilder.Entity("AirportManagement.Data.Aircraft", b =>

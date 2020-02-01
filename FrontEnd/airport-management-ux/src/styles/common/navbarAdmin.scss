@@ -1,4 +1,4 @@
-@import "variables.scss";
+@import "../variables.scss";
 
 .navigation-bar {
   font-family: $roboto-slab;
@@ -17,15 +17,26 @@
       height: 100px;
       width: 100px;
     }
-    .loginOption {
+
+    .option {
       display: inline-block;
-      color: $link-color;
+      padding: 15px;
+      margin: 0 10px;
+
+      &:hover {
+        background-color: #336b87;
+      }
+
+      a {
+        color: $link-color;
+        text-decoration: none;
+      }
     }
 
-    .options {
+
+    .imageContainer {
+      width: 40%;
       display: inline-block;
-      width: 75%;
-      color: $link-color;
     }
   }
 }

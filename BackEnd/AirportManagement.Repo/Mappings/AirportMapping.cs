@@ -7,6 +7,7 @@ namespace AirportManagement.Repo.Mappings
     {
         public AirportMapping(ModelBuilder modelBuilder)
         {
+
             modelBuilder.Entity<Airport>()
                 .HasMany<Terminal>(t => t.Terminals)
                 .WithOne(a => a.Airport)

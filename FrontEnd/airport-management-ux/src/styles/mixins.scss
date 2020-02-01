@@ -1,0 +1,89 @@
+@import "../variables.scss";
+
+@mixin row-types {
+    .odd {
+        background-color: $light-link-color;
+    }
+
+    .even {
+        background-color: $link-color;
+    }
+}
+
+@mixin control-wrapper {
+    padding: 1.5em;
+    border-top: 0.1em solid #778fa1;
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+}
+
+@mixin control {
+    width: 60%;
+    display: block;
+    margin: 0 auto;
+}
+
+@mixin label {
+    font-size: 17px;
+    color: $brown-color;
+    font-weight: 500;
+    width: 48%;
+    display: inline-block;
+    text-align: left;
+}
+
+@mixin input($width-value: 48%) {
+    padding: 10px;
+    border: 2px solid $border-input-color;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.09);
+    width: $width-value;
+    display: inline-block;
+    background-color: white;
+}
+
+@mixin error-wrapper($width-value: 60%) {
+    width: $width-value;
+    display: block;
+    margin: 0 auto;
+    background-color: transparent;
+
+    .error-message {
+        color: $error-message-color;
+        background-color: $error-message-background;
+        border-color: $error-message-border-color;
+        padding: 0.75em;
+        margin: 0.5em;
+        border: 1px solid transparent;
+        border-radius: 0.25rem;
+    }
+}
+
+@mixin error {
+    border: 2px solid #e74c3c;
+    background-color: #fdedeb;
+}
+
+@mixin section($padding-value, $margin-property) {
+    background: $light-link-color;
+    padding: $padding-value;
+    #{$margin-property}: 0.75em;
+    font-size: 24px;
+    display: block;
+}
+
+
+@mixin button($float-value:right, $background-color : $brown-color) {
+    background-color: $background-color;
+    border: none;
+    color: $shadow-background;
+    padding: 15px 50px;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 500;
+    border-radius: 4px;
+    cursor: pointer;
+    float: $float-value;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 3px 6px rgba(0, 0, 0, .23);
+}

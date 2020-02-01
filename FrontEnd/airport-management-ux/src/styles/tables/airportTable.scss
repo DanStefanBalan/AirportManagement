@@ -1,0 +1,94 @@
+@import "../variables.scss";
+
+.search-row {
+    width: 75%;
+    margin: 0 auto;
+
+    .search {
+        display: inline-block;
+        width: 60%;
+        padding: 0.5rem 0.75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+    }
+
+    .button-wrapper {
+        float: right;
+
+        .add-airport {
+            background-color: #90afc5;
+            text-decoration: none;
+            border: none;
+            padding: 10px 30px;
+            text-align: center;
+            font-size: 25px;
+            font-weight: 500;
+            border-radius: 4px;
+            cursor: pointer;
+            float: none;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16),
+                0 3px 6px rgba(0, 0, 0, 0.23);
+
+            a {
+                text-decoration: none;
+                color: #763626;
+            }
+        }
+
+    }
+}
+
+.tables {
+    width: 75%;
+    margin: 25px auto;
+    text-align: center;
+
+    thead {
+        background: #90afc5;
+
+        th {
+            vertical-align: middle;
+            border-bottom: 2px solid #2a3132;
+            color: #763626;
+            font-size: 20px;
+            padding: 15px;
+        }
+    }
+
+    tbody {
+        background: #a6bfd0;
+
+        tr {
+            td {
+                vertical-align: middle;
+                border-top: 1px solid #2a3132;
+                color: #2a3132;
+                font-size: 18px;
+                padding: 15px;
+            }
+        }
+
+    }
+}
+
+nav {
+    width: 75%;
+    margin: 0 auto;
+}
+
+.pagination {
+    .page-item {
+        &.active {
+            .page-link {
+                background: #763626;
+                border-color: #763626;
+            }
+        }
+    }
+}

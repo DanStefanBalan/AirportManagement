@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AirportManagement.Data;
+using Microsoft.EntityFrameworkCore;
 using AirportManagement.Repo.Mappings;
 
 namespace AirportManagement.Repo
@@ -8,6 +9,14 @@ namespace AirportManagement.Repo
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
         }
+
+        public DbSet<Airport> Airports { get; set; }
+        public DbSet<Aircraft> Aircrafts { get; set; }
+        public DbSet<Destination> Destinations { get; set; }
+        public DbSet<Flight> Flights { get; set; }
+        public DbSet<Gate> Gates { get; set; }
+        public DbSet<Terminal> Terminals { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

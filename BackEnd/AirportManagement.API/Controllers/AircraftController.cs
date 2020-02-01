@@ -23,7 +23,7 @@ namespace AirportManagement.API.Controllers
         public ActionResult CreateAirport([FromBody] AircraftModel aircraftModel)
         {
             var aircraft = Aircraft.Create(aircraftModel.AircraftType, aircraftModel.CountryOfRegistration, aircraftModel.NumberOfPilots, aircraftModel.Manufacturer, aircraftModel.Model, aircraftModel.NumberOfSeats, aircraftModel.NumberOfFlightAttendants);
-            _aircraftService.InsertAircraft(aircraft);
+            _aircraftService.Add(aircraft);
             return Ok("all good");
         }
 
