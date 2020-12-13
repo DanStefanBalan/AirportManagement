@@ -5,9 +5,10 @@ import { faPlaneDeparture } from "@fortawesome/free-solid-svg-icons";
 import "../../../../styles/forms/addFlight.scss";
 import {
   getCountries,
-  saveAirport,
-  getAirport
-} from "../../../../services/airportService";
+  saveResource,
+  getResource,
+} from "../../../../services/api";
+import { apiUrl } from "../../../../config.json";
 //resources
 import data from "../../../../resources/content.json";
 //common templates
@@ -15,17 +16,19 @@ import Input from "../../../common/forms/input";
 import Select from "../../../common/forms/select";
 import airportSchema from "../../../../schemas/airportSchema";
 
+const route = `${apiUrl}airports`;
+
 export default class AddAirport extends Component {
   state = {
     dataForm: {
       name: "",
       country: "",
-      city: ""
+      city: "",
     },
     updateForm: false,
     newlistOfCountries: [{ id: "", name: "" }],
 
-    errors: {}
+    errors: {},
   };
 
   validate = () => {
@@ -36,7 +39,7 @@ export default class AddAirport extends Component {
       {
         name: dataForm.name,
         country: dataForm.country,
-        city: dataForm.city
+        city: dataForm.city,
       },
       options
     );
@@ -46,15 +49,16 @@ export default class AddAirport extends Component {
       errorMessage[item.path[0]] = item.message;
     }
     this.setState({ errors: errorMessage });
+    return error;
   };
 
   add = async () => {
     const airport = {
       name: this.state.dataForm.name,
       country: this.state.dataForm.country,
-      city: this.state.dataForm.city
+      city: this.state.dataForm.city,
     };
-    saveAirport(airport);
+    saveResource(airport, route);
   };
 
   update = async () => {
@@ -62,12 +66,12 @@ export default class AddAirport extends Component {
       id: this.props.match.params.id,
       name: this.state.dataForm.name,
       country: this.state.dataForm.country,
-      city: this.state.dataForm.city
+      city: this.state.dataForm.city,
     };
-    saveAirport(airport);
+    saveResource(airport, route);
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     this.validate();
     if (this.state.updateForm === false) this.add();
@@ -76,18 +80,19 @@ export default class AddAirport extends Component {
     }
   };
 
-  createListOfCountries = listOfCountries => {
+  createListOfCountries = (listOfCountries) => {
     var newlistOfCountries = [{ id: "", name: "" }];
-    listOfCountries.map(item => {
+    listOfCountries.map((item) => {
       var myobj = { id: item.name.toLowerCase(), name: item.name };
       newlistOfCountries.push(myobj);
     });
     return newlistOfCountries;
   };
+
   async swtichToUpdate(airportId) {
     if (airportId !== undefined) this.setState({ updateForm: true });
     if (this.state.updateForm !== false) {
-      const { data: airportDetails } = await getAirport(airportId);
+      const { data: airportDetails } = await getResource(airportId, route);
       this.setState({ dataForm: this.mapToViewModel(airportDetails) });
     }
   }
@@ -104,18 +109,18 @@ export default class AddAirport extends Component {
     return {
       name: airport.name,
       country: airport.country,
-      city: airport.city
+      city: airport.city,
     };
   }
 
-  handleClick = e => {
+  handleClick = (e) => {
     e.preventDefault();
     this.setState({
       dataForm: {
         name: "",
         country: "",
-        city: ""
-      }
+        city: "",
+      },
     });
   };
 

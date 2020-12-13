@@ -1,8 +1,11 @@
-﻿namespace AirportManagement.API.Models
+﻿using System;
+
+namespace AirportManagement.API.Models
 {
     public class AircraftModel
     {
-        public string AircraftType { get; set; }
+        public Guid Id { get; set; }
+        public string AircraftNumber { get; set; }
         public string CountryOfRegistration { get; set; }
         public int NumberOfPilots { get; set; }
         public string Manufacturer { get; set; }

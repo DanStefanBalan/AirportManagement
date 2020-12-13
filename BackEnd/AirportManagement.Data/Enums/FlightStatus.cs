@@ -2,12 +2,13 @@
 {
     public enum FlightStatus
     {
-        DelayedOnLanding = 1,
-        OnAir = 2,
-        Canceled = 3,
-        Arrived = 4,
-        OpenCheckIn = 5,
-        DelayedOnTakeOff = 6,
-        BAirportManagementrding = 7
+        PendingCheckIn = 0,
+        OpenCheckIn = 1,
+        DelayedOnTakeOff = 2,
+        OnAir = 3,
+        DelayedOnLanding = 4,
+        Arrived = 5,
+        Canceled = 6,
+
     }
 }

@@ -8,11 +8,11 @@ namespace AirportManagement.API
     {
         public MapingEntities()
         {
+            CreateMap<Account, AccountModel>().ReverseMap();
             CreateMap<Airport, AirportModel>().ReverseMap();
             CreateMap<Aircraft, AircraftModel>().ReverseMap();
             CreateMap<Destination, DestinationModel>().ReverseMap();
             CreateMap<Flight, FlightModel>().ReverseMap();
-            CreateMap<Gate, GateModel>().ReverseMap();
             CreateMap<Terminal, TerminalModel>().ReverseMap();
         }
     }

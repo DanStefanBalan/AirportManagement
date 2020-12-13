@@ -10,22 +10,25 @@ namespace AirportManagement.Repo
         {
         }
 
+
         public DbSet<Airport> Airports { get; set; }
         public DbSet<Aircraft> Aircrafts { get; set; }
         public DbSet<Destination> Destinations { get; set; }
         public DbSet<Flight> Flights { get; set; }
-        public DbSet<Gate> Gates { get; set; }
         public DbSet<Terminal> Terminals { get; set; }
+
+        public DbSet<Account> Accounts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             new AirportMapping(modelBuilder);
             new AircraftMapping(modelBuilder);
+            new AccountMapping(modelBuilder);
             new DestinationMapping(modelBuilder);
             new FlightMapping(modelBuilder);
-            new GateMapping(modelBuilder);
             new TerminalMapping(modelBuilder);
+            new AccountMapping(modelBuilder);
         }
     }
 }

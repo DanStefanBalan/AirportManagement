@@ -110,5 +110,50 @@
       "name": "city",
       "label": "City"
     }
+  },
+
+  "aircraft": {
+    "title": "Add an aircraft",
+    "submitButton": {
+      "name": "Add an aircraft"
+    },
+    "updateButton": {
+      "name": "Update aircraft"
+    },
+    "backButton": {
+      "name": "Back"
+    },
+    "flightId": {
+      "name": "flightId",
+      "label": "Flight Id"
+    },
+    "aircraftNumber": {
+      "name": "aircraftNumber",
+      "label": "Aircraft Number"
+    },
+    "countryOfRegistration": {
+      "name": "countryOfRegistration",
+      "label": "Country Of Registration"
+    },
+    "numberOfPilots": {
+      "name": "numberOfPilots",
+      "label": "Number Of Pilots"
+    },
+    "manufacturer": {
+      "name": "manufacturer",
+      "label": "Manufacturer"
+    },
+    "model": {
+      "name": "model",
+      "label": "Model"
+    },
+    "numberOfSeats": {
+      "name": "numberOfSeats",
+      "label": "Number Of Seats"
+    },
+    "numberOfFlightAttendants": {
+      "name": "numberOfFlightAttendants",
+      "label": "Number Of FlightAttendants"
+    }
   }
 }

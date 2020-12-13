@@ -1,13 +1,13 @@
-@import "../variables.scss";
-@import "../mixins.scss";
+@import "../_includes/variables.scss";
+@import "../_includes/mixins.scss";
+
 
 body {
   background-color: $body-background;
-  font-family: $roboto-slab;
+  font-family: $font-family;
 
   .form-inner-content {
-    width: 70%;
-    margin: auto;
+    width: 80%;
 
     .header-section-wrapper {
       @include section(0.5em, margin-bottom);

@@ -8,20 +8,18 @@ namespace AirportManagement.Data
         public DateTime LocalTime { get; private set; }
         public WeatherType Weather { get; private set; }
         public Terminal Terminal { get; private set; }
-        public Gate Gate { get; private set; }
         public Airport Airport { get; private set; }
         public Flight Flight { get; private set; }
         public Guid? FlightDestinationId { get; set; }
 
 
-        public static Destination Create(DateTime localTime, WeatherType weather, Gate gate, Terminal terminal, Airport airport) =>
+        public static Destination Create(DateTime localTime, WeatherType weather, Terminal terminal, Airport airport) =>
             new Destination()
             {
                 Id = Guid.NewGuid(),
                 LocalTime = localTime,
                 Weather = weather,
                 Terminal = terminal,
-                Gate = gate,
                 Airport = airport
             };
     }

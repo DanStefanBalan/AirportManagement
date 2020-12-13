@@ -1,14 +1,14 @@
 import React from "react";
 
-const SearchBox = ({ value, onChange }) => {
+const SearchBox = ({ value, onChange, placeholderText }) => {
   return (
     <input
       type="text"
       name="query"
       className="search"
-      placeholder="Search airports..."
+      placeholder={placeholderText}
       value={value}
-      onChange={e => onChange(e.currentTarget.value)}
+      onChange={(e) => onChange(e.currentTarget.value)}
     />
   );
 };

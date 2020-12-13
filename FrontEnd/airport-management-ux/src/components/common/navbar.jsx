@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faSignInAlt,
   faSignOutAlt,
-  faUserPlus
+  faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 
 import "../../styles/common/navbar.scss";
@@ -11,8 +11,8 @@ import { Link } from "react-router-dom";
 
 class NavBar extends Component {
   state = {
-    logged: true,
-    user: ""
+    logged: false,
+    user: "",
   };
 
   isLoggedIn() {
@@ -36,15 +36,6 @@ class NavBar extends Component {
     return (
       <nav className="navigation-bar">
         <div className="navContainer">
-          <div className="imageContainer">
-            <Link to="/">
-              <img
-                className="logo"
-                src={require("../../resources/images/logo.png")}
-                alt="logo-airport"
-              />
-            </Link>
-          </div>
           <div className="option">{this.isLoggedIn()}</div>
           <div className="option">
             <Link to="/register">

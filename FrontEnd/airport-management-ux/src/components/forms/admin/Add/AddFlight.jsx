@@ -2,18 +2,26 @@ import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlaneDeparture } from "@fortawesome/free-solid-svg-icons";
 import "../../../../styles/forms/addFlight.scss";
+import {
+  getCountries,
+  saveResource,
+  getResource,
+  getAircraftsNumber,
+} from "../../../../services/api";
+import { apiUrl } from "../../../../config.json";
 //resources
 import minutes from "../../../../resources/images/min.png";
 import hours from "../../../../resources/images/hr.png";
 import data from "../../../../resources/content.json";
 //common templates
 import Input from "../../../common/forms/input";
-import DoubleInput from "../../../common/forms/doubleinput";
 import Select from "../../../common/forms/select";
-//Schemas
 import flightSchema from "../../../../schemas/flightSchema";
+import DoubleInput from "./../../../common/forms/doubleinput";
 
-export default class AddFlight extends Component {
+const flightRoute = `${apiUrl}flights`;
+
+export default class AddAirport extends Component {
   state = {
     dataForm: {
       flightNumber: "",
@@ -29,9 +37,11 @@ export default class AddFlight extends Component {
       flightHoursTime: "",
       status: "",
       gate: "",
-      airline: ""
+      airline: "",
     },
-    errors: {}
+    newlistOfCountries: [{ id: "", name: "" }],
+    newlistofAircraftNumber: [{ id: "", name: "" }],
+    errors: {},
   };
 
   validate = () => {
@@ -53,7 +63,7 @@ export default class AddFlight extends Component {
         flightMinutesTime: dataForm.flightMinutesTime,
         status: dataForm.status,
         gate: dataForm.gate,
-        airline: dataForm.airline
+        airline: dataForm.airline,
       },
       options
     );
@@ -65,18 +75,112 @@ export default class AddFlight extends Component {
     this.setState({ errors: errorMessage });
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
-    this.validate();
+  add = async () => {
+    const flight = {
+      flightNumber: this.state.dataForm.flightNumber,
+      aircraft: this.state.dataForm.aircraft,
+      destination: this.state.dataForm.destination,
+      estimationHoursTime: this.state.dataForm.estimationHoursTime,
+      estimationMinutesTime: this.state.dataForm.estimationMinutesTime,
+      arrivalHoursTime: this.state.dataForm.arrivalHoursTime,
+      arrivalTimeMinutesTime: this.state.dataForm.departureMinutesTime,
+      departureHoursTime: this.state.dataForm.departureHoursTime,
+      departureMinutesTime: this.state.dataForm.departureMinutesTime,
+      flightHoursTime: this.state.dataForm.flightHoursTime,
+      flightMinutesTime: this.state.dataForm.flightMinutesTime,
+      status: this.state.dataForm.status,
+      gate: this.state.dataForm.gate,
+      airline: this.state.dataForm.airline,
+    };
+    saveResource(flight, flightRoute);
   };
 
-  handleClick = e => {
+  update = async () => {
+    const flight = {
+      flightNumber: this.state.dataForm.flightNumber,
+      aircraft: this.state.dataForm.aircraft,
+      destination: this.state.dataForm.destination,
+      estimationHoursTime: this.state.dataForm.estimationHoursTime,
+      estimationMinutesTime: this.state.dataForm.estimationMinutesTime,
+      arrivalHoursTime: this.state.dataForm.arrivalHoursTime,
+      arrivalTimeMinutesTime: this.state.dataForm.departureMinutesTime,
+      departureHoursTime: this.state.dataForm.departureHoursTime,
+      departureMinutesTime: this.state.dataForm.departureMinutesTime,
+      flightHoursTime: this.state.dataForm.flightHoursTime,
+      flightMinutesTime: this.state.dataForm.flightMinutesTime,
+      status: this.state.dataForm.status,
+      gate: this.state.dataForm.gate,
+      airline: this.state.dataForm.airline,
+    };
+    saveResource(flight, flightRoute);
+  };
+
+  handleSubmit = (e) => {
     e.preventDefault();
-    var dataForm = { ...this.state.dataForm };
-    dataForm.status.value = "";
-    dataForm.flightMinutesTime = "";
-    dataForm.flightNumber = "";
-    this.setState({ dataForm });
+    this.validate();
+    if (this.state.updateForm === false) this.add();
+    else {
+      this.update();
+    }
+  };
+
+  createListOfCountries = (listOfCountries) => {
+    var newlistOfCountries = [{ id: "", name: "" }];
+    listOfCountries.map((item) => {
+      var myobj = { id: item.name.toLowerCase(), name: item.name };
+      newlistOfCountries.push(myobj);
+    });
+    return newlistOfCountries;
+  };
+
+  createListOfAircraftNumber = (listofAircraftNumber) => {
+    var newlistofAircraftNumber = [{ id: "", name: "" }];
+    let id = 1;
+    listofAircraftNumber.map((item) => {
+      let myobj = { id: id, name: item };
+      newlistofAircraftNumber.push(myobj);
+      id += 1;
+    });
+    return newlistofAircraftNumber;
+  };
+
+  async swtichToUpdate(flightId) {
+    if (flightId !== undefined) this.setState({ updateForm: true });
+    if (this.state.updateForm !== false) {
+      const { data: flightDetails } = await getResource(flightId);
+      this.setState({ dataForm: this.mapToViewModel(flightDetails) });
+    }
+  }
+
+  async componentDidMount() {
+    const { data: listOfAircraftNumbers } = await getAircraftsNumber();
+    const newlistofAircraftNumber = this.createListOfAircraftNumber(
+      listOfAircraftNumbers
+    );
+    const { data: listOfCountries } = await getCountries();
+    const newlistOfCountries = this.createListOfCountries(listOfCountries);
+    this.setState({ newlistOfCountries, newlistofAircraftNumber });
+    const airportId = this.props.match.params.id;
+    this.swtichToUpdate(airportId);
+  }
+
+  mapToViewModel(airport) {
+    return {
+      name: airport.name,
+      country: airport.country,
+      city: airport.city,
+    };
+  }
+
+  handleClick = (e) => {
+    e.preventDefault();
+    this.setState({
+      dataForm: {
+        name: "",
+        country: "",
+        city: "",
+      },
+    });
   };
 
   handleChange = ({ currentTarget: input }) => {
@@ -85,12 +189,7 @@ export default class AddFlight extends Component {
     this.setState({ dataForm });
   };
 
-  setSelectValues = () => {
-    return ["", "Value1", "Value2", "Value3", "Value4"];
-  };
-
   render() {
-    const coverage = this.setSelectValues();
     const { dataForm, errors } = this.state;
 
     return (
@@ -113,15 +212,17 @@ export default class AddFlight extends Component {
           <Select
             name={data.flight.aircraft.name}
             label={data.flight.aircraft.label}
+            value={dataForm.aircraft}
             onChange={this.handleChange}
-            options={coverage}
+            options={this.state.newlistofAircraftNumber}
             error={errors.aircraft}
           />
           <Select
             name={data.flight.destination.name}
             label={data.flight.destination.label}
+            value={dataForm.destination}
             onChange={this.handleChange}
-            options={coverage}
+            options={this.state.newlistOfCountries}
             error={errors.destination}
             rowType="odd"
           />
@@ -182,15 +283,17 @@ export default class AddFlight extends Component {
           <Select
             name={data.flight.status.name}
             label={data.flight.status.label}
+            value={dataForm.status}
             onChange={this.handleChange}
-            options={coverage}
+            options={this.state.newlistOfCountries}
             error={errors.status}
           />
           <Select
             name={data.flight.gate.name}
             label={data.flight.gate.label}
+            value={dataForm.gate}
             onChange={this.handleChange}
-            options={coverage}
+            options={this.state.newlistOfCountries}
             error={errors.gate}
             rowType="odd"
           />
@@ -206,7 +309,7 @@ export default class AddFlight extends Component {
               {data.flight.submitButton.name}
             </button>
             <button className="clear-details" onClick={this.handleClick}>
-              {data.flight.clearDataButton.name}
+              {data.flight.backButton.name}
             </button>
           </div>
         </form>

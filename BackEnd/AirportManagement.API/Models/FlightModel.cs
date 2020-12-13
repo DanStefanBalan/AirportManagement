@@ -14,7 +14,6 @@ namespace AirportManagement.API.Models
         public TimeSpan Duration { get; set; }
         public FlightStatus Status { get; set; }
         public TerminalModel Terminal { get; set; }
-        public GateModel Gate { get; set; }
         public string Airline { get; set; }
     }
 }

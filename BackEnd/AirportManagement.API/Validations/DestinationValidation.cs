@@ -15,8 +15,6 @@ namespace AirportManagement.API.Validations
                 .NotEmpty().WithMessage("Weather shouldn't be empty");
             RuleFor(d => d.Terminal)
                 .NotEmpty();
-            RuleFor(d => d.Gate)
-                .NotEmpty();
         }
 
         private bool BeAValidDate(DateTime arg)

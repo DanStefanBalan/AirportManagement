@@ -31,11 +31,11 @@ namespace AirportManagement.API
             services.AddMvc()
                 .AddFluentValidation(fv =>
                 {
+                    fv.RegisterValidatorsFromAssemblyContaining<AccountValidation>();
                     fv.RegisterValidatorsFromAssemblyContaining<AirportValidation>();
                     fv.RegisterValidatorsFromAssemblyContaining<AircraftValidation>();
                     fv.RegisterValidatorsFromAssemblyContaining<DestinationValidation>();
                     fv.RegisterValidatorsFromAssemblyContaining<FlightValidation>();
-                    fv.RegisterValidatorsFromAssemblyContaining<GateValidation>();
                     fv.RegisterValidatorsFromAssemblyContaining<Terminal>();
                 });
 
@@ -58,11 +58,11 @@ namespace AirportManagement.API
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             //services
+            services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IAirportService, AirportService>();
             services.AddTransient<IAircraftService, AircraftService>();
             services.AddTransient<IDestinationService, DestinationService>();
             services.AddTransient<IFlightService, FlightService>();
-            services.AddTransient<IGateService, GateService>();
             services.AddTransient<ITerminalService, TerminalService>();
             services.AddSingleton(_mapperConfiguration);
             services.AddCors();

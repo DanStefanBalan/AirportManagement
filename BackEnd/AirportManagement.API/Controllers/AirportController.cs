@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using AirportManagement.API.Models;
@@ -7,7 +6,6 @@ using AirportManagement.Data;
 using AirportManagement.Service.Repository;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace AirportManagement.API.Controllers
 {
@@ -60,13 +58,13 @@ namespace AirportManagement.API.Controllers
         [HttpDelete("{airportId}")]
         public ActionResult DeleteAirport(Guid airportId)
         {
-            var airportFromDb = _airportService.Get(airportId);
-            if (airportFromDb == null)
+            var airport = _airportService.Get(airportId);
+            if (airport == null)
             {
                 return NotFound();
             }
 
-            _airportService.Remove(airportFromDb);
+            _airportService.Remove(airport);
             return NoContent();
         }
 

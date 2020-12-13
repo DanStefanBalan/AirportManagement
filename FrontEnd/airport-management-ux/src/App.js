@@ -1,13 +1,10 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
-import NavBar from "./components/common/navbar";
-import NavBarAdmin from "./components/common/navbarAdmin";
-import Home from "./components/home";
 
 import Login from "./components/forms/login";
 
 import Airports from "./components/forms/admin/airports";
-import Aircraft from "./components/forms/admin/aircraft";
+import Aircrafts from "./components/forms/admin/aircrafts";
 import Destination from "./components/forms/admin/destination";
 import Flight from "./components/forms/admin/flight";
 import Terminal from "./components/forms/admin/terminal";
@@ -21,40 +18,45 @@ import AddFlight from "./components/forms/admin/Add/AddFlight";
 import AddGate from "./components/forms/admin/Add/AddGate";
 import AddTerminal from "./components/forms/admin/Add/AddTerminal";
 
-import CabinCrew from "./components/forms/cabinCrew";
-
 import "../src/styles/app.scss";
+import AdminPanel from "./components/forms/admin/admin-panel";
+import AdminMapPanel from "./components/map";
+import NotFound from "./pages/404";
 
 class App extends Component {
   state = {};
   render() {
     return (
-      <div className="wrapper">
-        <NavBarAdmin />
-        <div className="content">
-          <Switch>
-            <Route path="/admin/destination" component={Destination} />
-            <Route path="/admin/add-airport/:id" component={AddAirport} />
-            <Route path="/admin/airports" component={Airports} />
-            <Route path="/admin/aircraft" component={Aircraft} />
-            <Route path="/admin/terminal" component={Terminal} />
-            <Route path="/admin/gate" component={Gate} />
-            <Route path="/admin/flight" component={Flight} />
+      <React.Fragment>
+        <Switch>
+          <Route exact path="/admin/add-airport/:id" component={AddAirport} />
+          <Route exact path="/admin/add-aircraft/:id" component={AddAircraft} />
+          
+          <Route exact path="/admin/airports" component={Airports} />
+          <Route exact path="/admin/aircrafts" component={Aircrafts} />
+          <Route exact path="/admin/terminal" component={Terminal} />
+          <Route exact path="/admin/gate" component={Gate} />
+          <Route exact path="/admin/flight" component={Flight} />
+          <Route exact path="/admin/destination" component={Destination} />
 
-            <Route path="/admin/add-flight" component={AddFlight} />
-            <Route path="/admin/add-aircraft" component={AddAircraft} />
-            <Route path="/admin/add-airport" component={AddAirport} />
-            <Route path="/admin/add-destination" component={AddDestination} />
-            <Route path="/admin/add-flight" component={AddFlight} />
-            <Route path="/admin/add-gate" component={AddGate} />
-            <Route path="/admin/add-terminal" component={AddTerminal} />
+          <Route exact path="/admin/add-flight" component={AddFlight} />
+          <Route exact path="/admin/add-aircraft" component={AddAircraft} />
+          <Route exact path="/admin/add-airport" component={AddAirport} />
+          <Route
+            exact
+            path="/admin/add-destination"
+            component={AddDestination}
+          />
+          <Route exact path="/admin/add-flight" component={AddFlight} />
+          <Route exact path="/admin/add-gate" component={AddGate} />
+          <Route exact path="/admin/add-terminal" component={AddTerminal} />
 
-            <Route path="/cabin-crew" component={CabinCrew} />
-            <Route path="/login" component={Login} />
-            <Route path="/" component={Home} />
-          </Switch>
-        </div>
-      </div>
+          <Route exact path="/admin-panel" component={AdminPanel} />
+          <Route exact path="/admin-map" component={AdminMapPanel} />
+          <Route exact path="/" component={Login} />
+          <Route component={NotFound} />
+        </Switch>
+      </React.Fragment>
     );
   }
 }

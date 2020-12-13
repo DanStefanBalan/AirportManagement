@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
+﻿using System.Collections.Generic;
+using System.Linq;
 using AirportManagement.Data;
 using AirportManagement.Repo;
 using AirportManagement.Service.Repository;
-using Microsoft.EntityFrameworkCore;
 
 namespace AirportManagement.Service.Implementation
 {
@@ -14,5 +12,11 @@ namespace AirportManagement.Service.Implementation
         {
             
         }
+
+        public IReadOnlyCollection<string> GetAircraftsNumber()
+        {
+            return Context.Set<Aircraft>().Select(a => a.AircraftNumber).ToList();
+        }
+
     }
 }

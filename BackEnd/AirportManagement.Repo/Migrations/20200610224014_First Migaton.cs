@@ -3,12 +3,30 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AirportManagement.Repo.Migrations
 {
-    public partial class initial : Migration
+    public partial class FirstMigaton : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Airport",
+                name: "Accounts",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    UserName = table.Column<string>(nullable: true),
+                    Password = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    SurName = table.Column<string>(nullable: true),
+                    Sex = table.Column<string>(nullable: true),
+                    Age = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Accounts", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Airports",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -18,11 +36,11 @@ namespace AirportManagement.Repo.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Airport", x => x.Id);
+                    table.PrimaryKey("PK_Airports", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Flight",
+                name: "Flights",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -38,21 +56,21 @@ namespace AirportManagement.Repo.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Flight", x => x.Id);
+                    table.PrimaryKey("PK_Flights", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Flight_Airport_AirportId",
+                        name: "FK_Flights_Airports_AirportId",
                         column: x => x.AirportId,
-                        principalTable: "Airport",
+                        principalTable: "Airports",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Aircraft",
+                name: "Aircrafts",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     FlightId = table.Column<Guid>(nullable: true),
-                    AircraftType = table.Column<string>(nullable: true),
+                    AircraftNumber = table.Column<string>(nullable: true),
                     CountryOfRegistration = table.Column<string>(nullable: true),
                     NumberOfPilots = table.Column<int>(nullable: false),
                     Manufacturer = table.Column<string>(nullable: true),
@@ -62,17 +80,17 @@ namespace AirportManagement.Repo.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Aircraft", x => x.Id);
+                    table.PrimaryKey("PK_Aircrafts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Aircraft_Flight_FlightId",
+                        name: "FK_Aircrafts_Flights_FlightId",
                         column: x => x.FlightId,
-                        principalTable: "Flight",
+                        principalTable: "Flights",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Destination",
+                name: "Destinations",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
@@ -83,136 +101,86 @@ namespace AirportManagement.Repo.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Destination", x => x.Id);
+                    table.PrimaryKey("PK_Destinations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Destination_Airport_AirportId",
+                        name: "FK_Destinations_Airports_AirportId",
                         column: x => x.AirportId,
-                        principalTable: "Airport",
+                        principalTable: "Airports",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Destination_Flight_FlightDestinationId",
+                        name: "FK_Destinations_Flights_FlightDestinationId",
                         column: x => x.FlightDestinationId,
-                        principalTable: "Flight",
+                        principalTable: "Flights",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Terminal",
+                name: "Terminals",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: true),
+                    GateNumber = table.Column<int>(nullable: false),
                     AirportId = table.Column<Guid>(nullable: true),
                     FlightId = table.Column<Guid>(nullable: true),
                     DestinationId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Terminal", x => x.Id);
+                    table.PrimaryKey("PK_Terminals", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Terminal_Airport_AirportId",
+                        name: "FK_Terminals_Airports_AirportId",
                         column: x => x.AirportId,
-                        principalTable: "Airport",
+                        principalTable: "Airports",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Terminal_Destination_DestinationId",
+                        name: "FK_Terminals_Destinations_DestinationId",
                         column: x => x.DestinationId,
-                        principalTable: "Destination",
+                        principalTable: "Destinations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Terminal_Flight_DestinationId",
+                        name: "FK_Terminals_Flights_DestinationId",
                         column: x => x.DestinationId,
-                        principalTable: "Flight",
+                        principalTable: "Flights",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Gate",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    FlightId = table.Column<Guid>(nullable: true),
-                    DestinationId = table.Column<Guid>(nullable: true),
-                    TerminalId = table.Column<Guid>(nullable: true),
-                    GateNumber = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Gate", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Gate_Destination_DestinationId",
-                        column: x => x.DestinationId,
-                        principalTable: "Destination",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Gate_Flight_FlightId",
-                        column: x => x.FlightId,
-                        principalTable: "Flight",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Gate_Terminal_TerminalId",
-                        column: x => x.TerminalId,
-                        principalTable: "Terminal",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Aircraft_FlightId",
-                table: "Aircraft",
+                name: "IX_Aircrafts_FlightId",
+                table: "Aircrafts",
                 column: "FlightId",
                 unique: true,
                 filter: "[FlightId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Destination_AirportId",
-                table: "Destination",
+                name: "IX_Destinations_AirportId",
+                table: "Destinations",
                 column: "AirportId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Destination_FlightDestinationId",
-                table: "Destination",
+                name: "IX_Destinations_FlightDestinationId",
+                table: "Destinations",
                 column: "FlightDestinationId",
                 unique: true,
                 filter: "[FlightDestinationId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Flight_AirportId",
-                table: "Flight",
+                name: "IX_Flights_AirportId",
+                table: "Flights",
                 column: "AirportId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Gate_DestinationId",
-                table: "Gate",
-                column: "DestinationId",
-                unique: true,
-                filter: "[DestinationId] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Gate_FlightId",
-                table: "Gate",
-                column: "FlightId",
-                unique: true,
-                filter: "[FlightId] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Gate_TerminalId",
-                table: "Gate",
-                column: "TerminalId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Terminal_AirportId",
-                table: "Terminal",
+                name: "IX_Terminals_AirportId",
+                table: "Terminals",
                 column: "AirportId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Terminal_DestinationId",
-                table: "Terminal",
+                name: "IX_Terminals_DestinationId",
+                table: "Terminals",
                 column: "DestinationId",
                 unique: true,
                 filter: "[DestinationId] IS NOT NULL");
@@ -221,22 +189,22 @@ namespace AirportManagement.Repo.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Aircraft");
+                name: "Accounts");
 
             migrationBuilder.DropTable(
-                name: "Gate");
+                name: "Aircrafts");
 
             migrationBuilder.DropTable(
-                name: "Terminal");
+                name: "Terminals");
 
             migrationBuilder.DropTable(
-                name: "Destination");
+                name: "Destinations");
 
             migrationBuilder.DropTable(
-                name: "Flight");
+                name: "Flights");
 
             migrationBuilder.DropTable(
-                name: "Airport");
+                name: "Airports");
         }
     }
 }

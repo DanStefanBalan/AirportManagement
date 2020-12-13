@@ -1,4 +1,4 @@
-@import "../variables.scss";
+@import "../_includes/variables.scss";
 
 @mixin row-types {
     .odd {
@@ -86,4 +86,17 @@
     cursor: pointer;
     float: $float-value;
     box-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 3px 6px rgba(0, 0, 0, .23);
+}
+
+@mixin header-form() {
+    background: #04346b;
+    color: #d2dde5;
+    font-weight: 500;
+    font-size: 20px;
+    padding: 25px;
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+    border-color: transparent;
+    margin-bottom: 25px;
 }

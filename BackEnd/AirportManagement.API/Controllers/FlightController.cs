@@ -1,4 +1,5 @@
-﻿using AirportManagement.Data;
+﻿using AirportManagement.API.Models;
+using AirportManagement.Data;
 using AirportManagement.Repo;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -17,5 +18,12 @@ namespace AirportManagement.API.Controllers
             _flightRepository = flightRepository;
             _mapper = mapper;
         }
+
+        [HttpPost]
+        public IActionResult CreateFlight([FromBody] FlightModel flightModel)
+        {
+            return Ok();
+        }
+
     }
 }

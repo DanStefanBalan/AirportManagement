@@ -1,0 +1,78 @@
+.wrapper-sidebar {
+    background: #222d32;
+    width: 16%;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 100%;
+
+    .image-wrapper {
+        background-color: #3C8DBC;
+
+        .logo {
+            display: block;
+            margin: 0 auto;
+            height: 120px;
+            width: auto;
+            padding: 20px;
+        }
+    }
+
+    .list-options {
+        list-style: none;
+        padding: 0;
+
+        .option {
+            padding: 15px;
+            margin: 10px 0;
+            font-size: 18px;
+            font-weight: 600;
+            background: #222d32;
+            color: #738d97;
+
+
+            &:hover {
+                background-color: #1E282C;
+                border-left: 3px solid #3C8DBC;
+                color: #F0FFFF;
+            }
+
+            .text {
+                display: inline-block;
+                margin-left: 10px;
+
+                a {
+                    color: #738d97;
+                    text-decoration: none;
+                }
+
+            }
+        }
+    }
+
+    .logo-wrapper {
+        padding: 20px 15px 10px;
+
+        .avatar {
+            background-image: url("../resources/images/logo-Placeholder.png");
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 10px;
+
+        }
+
+        .username {
+            color: #FFFFFF;
+            font-size: 16px;
+            font-weight: 600;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+    }
+}

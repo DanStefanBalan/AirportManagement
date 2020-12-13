@@ -1,9 +1,11 @@
-@import "../styles/variables.scss";
+@import "../styles/_includes/variables.scss";
 
 body {
-  background-color: $main-background !important;
+  background-color: white;
 
   .content {
     margin: 35px 0;
+    width: 82%;
+    float: right;
   }
 }

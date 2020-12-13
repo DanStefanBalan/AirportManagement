@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using AirportManagement.Data;
+﻿using AirportManagement.Data;
 using AirportManagement.Repo;
 using AirportManagement.Service.Repository;
 

@@ -10,7 +10,6 @@ namespace AirportManagement.API.Models
         public string City { get; set; }
         public WeatherType Weather { get; set; }
         public TerminalModel Terminal { get; set; }
-        public GateModel Gate { get; set; }
 
     }
 }

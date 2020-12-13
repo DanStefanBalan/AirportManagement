@@ -8,29 +8,29 @@ class AirportTable extends Component {
     {
       path: "name",
       label: "Name",
-      content: airport => (
+      content: (airport) => (
         <Link to={`/admin/add-airport/${airport.id}`}>{airport.name}</Link>
-      )
+      ),
     },
     {
       path: "country",
-      label: "Country"
+      label: "Country",
     },
     {
       path: "city",
-      label: "City"
+      label: "City",
     },
     {
       path: "delete",
-      content: airport => (
+      content: (airport) => (
         <button
           onClick={() => this.props.onDelete(airport)}
-          className="btn btn-danger btn-sm"
+          className="btn btn-danger btn-md"
         >
           Delete
         </button>
-      )
-    }
+      ),
+    },
   ];
   render() {
     const { airports, onSort, sortColumn } = this.props;

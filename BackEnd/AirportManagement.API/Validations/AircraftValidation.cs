@@ -7,7 +7,7 @@ namespace AirportManagement.API.Validations
     {
         public AircraftValidation()
         {
-            RuleFor(a => a.AircraftType)
+            RuleFor(a => a.AircraftNumber)
                 .NotEmpty();
             RuleFor(a => a.CountryOfRegistration)
                 .NotEmpty();

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using AirportManagement.Data;
 using AirportManagement.Repo;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace AirportManagement.Service.Repository
 {

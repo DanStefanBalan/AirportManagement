@@ -20,12 +20,6 @@ namespace AirportManagement.Repo.Mappings
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Flight>()
-                .HasOne<Gate>(f => f.Gate)
-                .WithOne(g => g.Flight)
-                .HasForeignKey<Gate>(f => f.FlightId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Flight>()
                 .HasOne<Terminal>(t => t.Terminal)
                 .WithOne(t => t.Flight)
                 .HasForeignKey<Terminal>(t => t.DestinationId)

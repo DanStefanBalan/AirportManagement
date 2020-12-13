@@ -1,11 +1,20 @@
 import React, { Component } from "react";
-import { getAirports, deleteAirport } from "../../../services/airportService";
+import { getResources, deleteResource } from "../../../services/api";
+import { apiUrl } from "../../../config.json";
 import Pagination from "../../common/pagination";
 import { paginate } from "../../../helpers/paginate";
 import AirportTable from "../../tables/airportTable";
 import SearchBox from "../../common/searchBox";
-import "../../../styles/tables/airportTable.scss";
+import "../../../styles/table.scss";
 import _ from "lodash";
+import SideBar from "./../../common/sidebar";
+import NavBar from "./../../common/navbar";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import ReactModal from "react-modal";
+import AddAirport from "./Add/AddAirport";
+
+const route = `${apiUrl}airports`;
 
 class Airports extends Component {
   state = {
@@ -14,7 +23,7 @@ class Airports extends Component {
     currentPage: 1,
     totalCount: 0,
     searchQuery: "",
-    sortColumn: { path: "name", order: "asc" }
+    sortColumn: { path: "name", order: "asc" },
   };
 
   getPagedData = () => {
@@ -23,11 +32,11 @@ class Airports extends Component {
       currentPage,
       sortColumn,
       airports,
-      searchQuery
+      searchQuery,
     } = this.state;
     var filteredAirports = airports;
     if (searchQuery)
-      filteredAirports = airports.filter(m =>
+      filteredAirports = airports.filter((m) =>
         m.name.toLowerCase().startsWith(searchQuery.toLowerCase())
       );
     const sorted = _.orderBy(
@@ -40,58 +49,65 @@ class Airports extends Component {
   };
 
   async componentDidMount() {
-    const { data: airports } = await getAirports();
+    const { data: airports } = await getResources(route);
     const totalCount = airports.length;
     this.setState({ airports, totalCount });
   }
 
-  handleSearch = query => {
+  handleSearch = (query) => {
     this.setState({ searchQuery: query, currentPage: 1 });
   };
 
-  handlePageChange = page => {
+  handlePageChange = (page) => {
     this.setState({ currentPage: page });
   };
 
-  handleSort = sortColumn => {
+  handleSort = (sortColumn) => {
     this.setState({ sortColumn });
   };
 
-  handleDelete = airport => {
-    const airports = this.state.airports.filter(m => m.id !== airport.id);
+  handleDelete = (airport) => {
+    const airports = this.state.airports.filter((m) => m.id !== airport.id);
     this.setState({ airports });
-    deleteAirport(airport.id);
+    deleteResource(airport.id, route);
   };
 
   render() {
-    const { length: count } = this.state.airports;
     const { pageSize, currentPage, sortColumn, searchQuery } = this.state;
-
-    if (count === 0) return <p>There are no airports in the database.</p>;
-
     const { totalCount, data: airports } = this.getPagedData();
+
     return (
       <React.Fragment>
-        <div className="search-row">
-          <SearchBox value={searchQuery} onChange={this.handleSearch} />
-          <div className="button-wrapper">
-            <button className="add-airport">
-              <a href="/admin/add-airport">Add airport</a>
-            </button>
+        <NavBar />
+        <SideBar />
+        <div className="table-wrapper">
+          <div className="search-row">
+            <SearchBox
+              value={searchQuery}
+              onChange={this.handleSearch}
+              placeholderText="Search airports..."
+            />
+            <div className="button-wrapper">
+              <button className="add-button">
+                <a href="/admin/add-airport">
+                  <FontAwesomeIcon icon={faPlus} /> Add airport
+                </a>
+              </button>
+            </div>
           </div>
+          <AirportTable
+            airports={airports}
+            onDelete={this.handleDelete}
+            onSort={this.handleSort}
+            sortColumn={sortColumn}
+          />
+          <Pagination
+            itemsCount={totalCount}
+            pageSize={pageSize}
+            currentPage={currentPage}
+            onPageChange={this.handlePageChange}
+          />
         </div>
-        <AirportTable
-          airports={airports}
-          onDelete={this.handleDelete}
-          onSort={this.handleSort}
-          sortColumn={sortColumn}
-        />
-        <Pagination
-          itemsCount={totalCount}
-          pageSize={pageSize}
-          currentPage={currentPage}
-          onPageChange={this.handlePageChange}
-        />
       </React.Fragment>
     );
   }

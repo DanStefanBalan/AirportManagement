@@ -22,7 +22,7 @@ namespace AirportManagement.API.Controllers
         [HttpPost]
         public ActionResult CreateTerminal([FromBody] TerminalModel terminalModel)
         {
-            var terminal = Terminal.Create(terminalModel.Name);
+            var terminal = Terminal.Create(terminalModel.Name, 11);
             _terminalRepository.Add(terminal);
             return Ok();
         }

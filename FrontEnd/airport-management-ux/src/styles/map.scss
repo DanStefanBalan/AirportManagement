@@ -1,0 +1,33 @@
+@import "./_includes/variables.scss";
+@import "./_includes/mixins.scss";
+
+.wrapper-map {
+    height: 100vh;
+    background-image: linear-gradient(to bottom right, #04346b, #83afd2);
+    width: 100%;
+
+    .wrapper-visualization {
+        width: 30%;
+        display: block;
+        margin: 0 auto;
+        padding-top: 50px;
+
+
+
+        .visualization {
+            display: block;
+            margin: 0 auto;
+
+            .select-btn {
+                @include button(none, #032642);
+                display: inline-block;
+                width: 50%;
+                color: #d2dde5;
+            }
+
+            .active {
+                background: red;
+            }
+        }
+    }
+}

@@ -9,7 +9,6 @@ namespace AirportManagement.Data
         public Aircraft Aircraft { get; private set; }
         public Destination Destination { get; private set; }
         public Terminal Terminal { get; private set; }
-        public Gate Gate { get; private set; }
         public Guid? AirportId { get; private set; }
         public Guid? DestinationId { get; private set; }
         public string FlightNumber { get; private set; }
@@ -18,13 +17,13 @@ namespace AirportManagement.Data
         public TimeSpan DepartureTime { get; private set; }
         public TimeSpan ArrivalTime { get; private set; }
         public TimeSpan FlightTime { get; private set; }
-        public FlightStatus Status { get; private set; }
+        public FlightStatus Status { get; private set; } = FlightStatus.PendingCheckIn;
 
 
 
 
 
-        public static Flight Create(string flightNumber, Aircraft aircraft, Destination destination, TimeSpan estimationTime, TimeSpan departureTime, TimeSpan arrivalTime, TimeSpan flightTime, FlightStatus status, Terminal terminal, Gate gate, string airline) => new Flight()
+        public static Flight Create(string flightNumber, Aircraft aircraft, Destination destination, TimeSpan estimationTime, TimeSpan departureTime, TimeSpan arrivalTime, TimeSpan flightTime, Terminal terminal, string airline) => new Flight()
         {
             Id = new Guid(),
             Aircraft = aircraft,
@@ -35,8 +34,6 @@ namespace AirportManagement.Data
             FlightTime = flightTime,
             EstimationTime = estimationTime,
             FlightNumber = flightNumber,
-            Gate = gate,
-            Status = status,
             Terminal = terminal
         };
 

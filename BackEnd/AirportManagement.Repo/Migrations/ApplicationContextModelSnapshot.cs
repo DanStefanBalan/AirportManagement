@@ -19,13 +19,48 @@ namespace AirportManagement.Repo.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("AirportManagement.Data.Account", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Sex")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SurName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Accounts");
+                });
+
             modelBuilder.Entity("AirportManagement.Data.Aircraft", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("AircraftType")
+                    b.Property<string>("AircraftNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CountryOfRegistration")
@@ -147,39 +182,6 @@ namespace AirportManagement.Repo.Migrations
                     b.ToTable("Flights");
                 });
 
-            modelBuilder.Entity("AirportManagement.Data.Gate", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("DestinationId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("FlightId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("GateNumber")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("TerminalId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DestinationId")
-                        .IsUnique()
-                        .HasFilter("[DestinationId] IS NOT NULL");
-
-                    b.HasIndex("FlightId")
-                        .IsUnique()
-                        .HasFilter("[FlightId] IS NOT NULL");
-
-                    b.HasIndex("TerminalId");
-
-                    b.ToTable("Gates");
-                });
-
             modelBuilder.Entity("AirportManagement.Data.Terminal", b =>
                 {
                     b.Property<Guid>("Id")
@@ -194,6 +196,9 @@ namespace AirportManagement.Repo.Migrations
 
                     b.Property<Guid?>("FlightId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("GateNumber")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -234,24 +239,6 @@ namespace AirportManagement.Repo.Migrations
                     b.HasOne("AirportManagement.Data.Airport", "Airport")
                         .WithMany("Flights")
                         .HasForeignKey("AirportId")
-                        .OnDelete(DeleteBehavior.NoAction);
-                });
-
-            modelBuilder.Entity("AirportManagement.Data.Gate", b =>
-                {
-                    b.HasOne("AirportManagement.Data.Destination", "Destination")
-                        .WithOne("Gate")
-                        .HasForeignKey("AirportManagement.Data.Gate", "DestinationId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("AirportManagement.Data.Flight", "Flight")
-                        .WithOne("Gate")
-                        .HasForeignKey("AirportManagement.Data.Gate", "FlightId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("AirportManagement.Data.Terminal", "Terminal")
-                        .WithMany("Gates")
-                        .HasForeignKey("TerminalId")
                         .OnDelete(DeleteBehavior.NoAction);
                 });
 

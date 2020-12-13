@@ -1,0 +1,63 @@
+@import "../_includes/variables.scss";
+
+.wrapper-404 {
+    height: 100vh;
+    font-family: $font-family;
+
+    .image-404 {
+        height: 100%;
+        width: 100%;
+        background-image: url('../../resources/images/404.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: top center;
+
+        .content-wrapper {
+            margin: 0;
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -40%);
+
+            .statement {
+                text-align: center;
+                line-height: 1;
+                color: #0f1c28;
+
+                .sub-title {
+                    font-size: 80px;
+                }
+
+                .title {
+                    font-size: 150px;
+                    font-weight: 800;
+                }
+            }
+
+            a {
+                text-decoration: none;
+
+                .home {
+                    background-color: #3f5e71;
+                    width: 45%;
+                    font-weight: 500;
+                    height: 70px;
+                    margin: 20px auto;
+                    display: block;
+                    border: none;
+                    color: #cddae1;
+                    font-size: 24px;
+                    border-radius: 30px;
+                    text-decoration: none;
+                    box-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 3px 6px rgba(0, 0, 0, .23);
+
+                }
+            }
+
+        }
+
+
+
+    }
+
+}

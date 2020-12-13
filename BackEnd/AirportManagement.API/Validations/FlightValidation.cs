@@ -24,8 +24,6 @@ namespace AirportManagement.API.Validations
                 .NotEmpty().WithMessage("Status shouldn't be empty");
             RuleFor(f => f.Terminal)
                 .NotEmpty().WithMessage("Terminal shouldn't be empty");
-            RuleFor(f => f.Gate)
-                .NotEmpty().WithMessage("Gate shouldn't be empty");
             RuleFor(f => f.Airline)
                 .Matches("^[a-zA-Z]+$").WithMessage("Airline should have just letters")
                 .NotEmpty().WithMessage("Airline shouldn't be empty");

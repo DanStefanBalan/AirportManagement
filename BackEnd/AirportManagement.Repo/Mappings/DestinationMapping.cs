@@ -7,11 +7,6 @@ namespace AirportManagement.Repo.Mappings
     {
         public DestinationMapping(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Destination>()
-                .HasOne<Gate>(d => d.Gate)
-                .WithOne(d => d.Destination)
-                .HasForeignKey<Gate>(d => d.DestinationId)
-                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Destination>()
                 .HasOne<Terminal>(d => d.Terminal)
